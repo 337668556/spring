@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <bean id="computer" class="com.bean.Computer" scope="prototype">
+        <property name="mainboard" value="微星"/>
+        <property name="hdd" value="希捷"/>
+        <property name="ram" value="金士顿"/>
+
+
+    </bean>
+
+    <bean id="mobliephone" class="com.bean.Mobilephone" scope="prototype">
+        <constructor-arg index="0" value="heihei"/>
+
+        <constructor-arg index="1" value="s"/>
+
+    </bean>
+
+    <bean id="strudent" class="com.bean.Strudent" scope="prototype" autowire="byType">
+        <property name="name" value="xu"/>
+        <property name="computer" ref="computer"/>
+        <property name="mobilephone" ref="mobliephone"/>
+    </bean>
+
+    <bean id="massage" class="com.bean.Massage" scope="prototype">
+        <property name="id">
+            <value>1</value>
+        </property>
+        <property name="success" value="true"/>
+
+        <property name="username" value="#{db.user}"/>
+
+        <property name="password">
+            <null></null>
+        </property>
+
+        <property name="somelist">
+          <list>
+              <value>大庆</value>
+              <value>哈尔滨</value>
+              <value>佳木斯</value>
+          </list>
+        </property>
+
+        <property name="someSet">
+            <set>
+                <value>大庆</value>
+                <value>哈尔滨</value>
+                <value>佳木斯</value>
+            </set>
+        </property>
+
+
+        <property name="someMap">
+            <map>
+                <entry key="BJ" value="北京"></entry>
+                <entry key="sh" value="上海"></entry>
+
+            </map>
+        </property>
+
+        <property name="someProps">
+            <props >
+                <prop key="name">root</prop>
+                <prop key="pwd">root</prop>
+                
+            </props>
+        </property>
+        <property name="langs" ref="langlist"/>
+
+    </bean>
+    <util:properties id="db" location="classpath:db.properties"/>
+    <util:list id="langlist">
+        <value>java</value>
+        <value>c+</value>
+ </util:list>
+
+</beans>

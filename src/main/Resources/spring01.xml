@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--基础代码-->
+    <bean id="person" class="com.aop01.Person"/>
+
+    <!--增强-->
+    <bean id="sleepAdvice" class="com.aop01.SleepAdvice"/>
+
+    <!--    切点-->
+    <bean id="sleepPointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut">
+        <property name="pattern" value=".*sleep"/>
+
+    </bean>
+
+
+    <!--切面-->
+    <bean id="sleepAdvisor" class="org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor">
+        <property name="advice" ref="sleepAdvice"/>
+        <property name="pointcut" ref="sleepPointcut"/>
+
+    </bean>
+
+    <bean id="personProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target" ref="person"/>
+        <property name="interceptorNames" value="sleepAdvisor"/>
+
+    </bean>
+
+</beans>
