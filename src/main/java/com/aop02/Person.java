@@ -9,6 +9,7 @@ public class Person  {
         System.out.println("睡觉002");
         System.out.println("睡觉002");
         System.out.println("睡觉002");
+        System.out.println("睡觉002");
 
 
     }
