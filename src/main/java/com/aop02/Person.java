@@ -7,5 +7,6 @@ public class Person  {
 
     public void ssleep() {
         System.out.println("睡觉002");
+        System.out.println("1");
     }
 }
